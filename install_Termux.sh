@@ -34,7 +34,7 @@ function Options {
         printf "${BLUE}\n\n[?]${WHITE}WOULD YOU LIKE TO ENABLE EMAIL-OPTION(1)YES(2)(NO)\n\n"
 		read -p"$GREEN[#MR.HOLMES#]$WHITE-->" Opt
 	done
-	if [ $Opt == 1 ];
+	if [ "$Opt" == 1 ];
 		then
 		status="Enabled"
 		printf "${WHITE}\n\nINSERT YOUR RECIPIENT EMAIL\n\n"
@@ -72,7 +72,7 @@ function Options {
 			printf "${WHITE}\nINSERT YOUR SMTP SERVER PORT \n\n"
 			read -p"$GREEN[#MR.HOLMES#]$WHITE-->" port
 		done
-	elif [ $Opt == 2 ];
+	elif [ "$Opt" == 2 ];
 		then
 		printf "${GREEN}\n[+]${WHITE}SKIPPING..."
 		status="Disabled"
@@ -112,10 +112,10 @@ function Options {
 	fi
 	printf "${WHITE}\n\nWOULD YOU LIKE TO SAVE YOUR LOG SESSIONS(1)YES(2)NO\n\n"
 	read -p"$GREEN[#MR.HOLMES#]$WHITE-->" Logs
-	if [ $Logs == 2 ];
+	if [ "$Logs" == 2 ];
 		then
 		Logs="False"
-	elif [ $Logs == 1 ];
+	elif [ "$Logs" == 1 ];
 		then
 		Logs="True"
 	fi
@@ -126,17 +126,17 @@ function Options {
 		printf "${WHITE}\nSELECT YOUR GUI-DEFAULT LANGUAGE\n(1)ENGLISH\n(2)ITALIANO\n(3)FRANÇAIS\n\n"
 		read -p"$GREEN[#MR.HOLMES#]$WHITE-->" Language
 	done
-	if [ $Language == 1 ];
+	if [ "$Language" == 1 ];
 		then
 		Lang="English"
 		mode="ENGLISH"
 
-	elif [ $Language == 2 ];
+	elif [ "$Language" == 2 ];
 		then
 		Lang="Italian"
 		mode="ITALIANO" 
 
-	elif [ $Language == 3 ];
+	elif [ "$Language" == 3 ];
 		then
 		Lang="French"
 		mode="FRANÇAIS"
@@ -149,24 +149,24 @@ function Options {
 		printf "${WHITE}\nSELECT YOUR DATE-FORMAT\n(1)EUROPE(DD/MM/YYYY)\n(2)AMERICA'USA'(MM/DD/YYYY)\n(3)ASIA(YYYY/MM/DD)\n\n"
 		read -p"$GREEN[#MR.HOLMES#]$WHITE-->" DateFormat
 	done
-	if [ $DateFormat == 1 ];
+	if [ "$DateFormat" == 1 ];
 		then
 		Date="eu"
 		mode="EUROPE(EU)"
 
-	elif [ $DateFormat == 2 ];
+	elif [ "$DateFormat" == 2 ];
 		then
 		Date="us"
 		mode="AMERICA(US)" 
 
-	elif [ $DateFormat == 3 ];
+	elif [ "$DateFormat" == 3 ];
 		then
 		Date="as"
 		mode="ASIA(AS)"
 	fi
 	printf "\n${WHITE}DATE-FORMAT:${GREEN}$mode\n"
 	printf "${BLUE}\nCREATING CONFIGURATION FILE"
-	cd Configuration
+	cd Configuration || exit
 	echo ";THIS FILE HAS BEEN GENERATE BY MR.HOLMES INSTALLER">Configuration.ini
 	echo ";CHANGE THESE VALUE IF YOU WANT TO UPDATE YOUR SETTINGS FROM HERE">>Configuration.ini
 	echo ";BUT DO NOT CHANGE THE PARAMETERS NAME">>Configuration.ini
@@ -182,8 +182,8 @@ function Options {
 	echo "[Settings]">>Configuration.ini
 	echo "password = $up_pass">>Configuration.ini
 	echo "api_key = $key">>Configuration.ini 
-	echo "proxy_list" = $proxies>>Configuration.ini
-	echo "useragent_list" = $useragent>>Configuration.ini
+	echo "proxy_list" = "$proxies">>Configuration.ini
+	echo "useragent_list" = "$useragent">>Configuration.ini
 	echo "show_logs = $Logs">>Configuration.ini
 	echo "language"= "$Lang">>Configuration.ini
 	echo "date_format"= "$Date">>Configuration.ini
@@ -230,7 +230,7 @@ function AutoInstaller {
 function installer {
 	printf "${BLUE}\n\nWELCOME TO THE INSTALLATION MANAGER WOULD YOU LIKE TO BEGIN(1)YES(2)NO\n\n"
 	read -p "$GREEN[#MR.HOLMES#]$WHITE-->" confvar
-	if [ $confvar == 1 ];
+	if [ "$confvar" == 1 ];
 		then 
 		printf "${BLUE}\nWOULD YOU LIKE TO SET(1)MANUAL-INSTALLATION(2)AUTO-INSTALLATION\n\n"
 		read -p "$GREEN[#MR.HOLMES#]$WHITE-->" selected
@@ -239,26 +239,26 @@ function installer {
 			printf "${BLUE}\n\nWOULD YOU LIKE TO SET(1)MANUAL-INSTALLATION(2)AUTO-INSTALLATION\n\n"
 			read -p "$GREEN[#MR.HOLMES#]$WHITE-->" selected
 		done
-		if [ $selected == 1 ];
+		if [ "$selected" == 1 ];
 			then 
 			Packet_Installer
 			Mail_Options
 			Options
 			cd ../
 			
-		elif [ $selected == 2 ];
+		elif [ "$selected" == 2 ];
 			then
 		    AutoInstaller
 		fi
-		cd Core
+		cd Core || exit
 		printf "${WHITE}\n\nGIVING PERMISSION TO LUNCH FOR CORE FILES"
 		sudo chmod +x update.sh
 		cd ../
-		cd Launchers
+		cd Launchers || exit
 		sudo chmod +x Launcher.sh
 		cd ../
 		cd ../
-		echo "path = `pwd`">>Mr.Holmes/Configuration/Configuration.ini
+		echo "path = $(pwd)">>Mr.Holmes/Configuration/Configuration.ini
 		sleep 2
 		printf "\n\nSETTING CLI INTERFACE..."
 		echo "Mobile">Mr.Holmes/Display/Display.txt
