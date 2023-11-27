@@ -14,7 +14,7 @@ RED=$(tput setaf 1)
 ROOT=$(id -u)
 
 function Check_Root {
-	if [ $ROOT -ne 0 ];
+	if [ "$ROOT" -ne 0 ];
 		then
 	 	clear
 		banner
@@ -38,7 +38,7 @@ function Preference {
 		printf "${WHITE}\nSELECT YOUR GUI-DEFAULT LANGUAGE\n(1)ENGLISH\n(2)ITALIANO\n(3)FRANÇAIS\n(4)BROWSER-LANGUAGE\n\n"
 		read -p"$GREEN[#MR.HOLMES#]$WHITE-->" Language
 	done
-	if [ $Language == 1 ];
+	if [ "$Language" == 1 ];
 		then
 		echo '{
     "Language":{
@@ -46,7 +46,7 @@ function Preference {
     }
 }'>GUI/Language/Language.json
    	mode="ENGLISH"
-	elif [ $Language == 2 ];
+	elif [ "$Language" == 2 ];
 	then
 		echo '{
     "Language":{
@@ -54,7 +54,7 @@ function Preference {
     }
 }'>GUI/Language/Language.json
 	mode="ITALIANO"
-	elif [ $Language == 3 ];
+	elif [ "$Language" == 3 ];
 	then
 		echo '{
 	"Language":{
@@ -62,7 +62,7 @@ function Preference {
 	}
 }'>GUI/Language/Language.json
 		mode="FRANÇAIS"
-	elif [ $Language == 4 ];
+	elif [ "$Language" == 4 ];
 	then
 		echo '{
 	"Language":{
@@ -79,7 +79,7 @@ function Preference {
 		printf "${WHITE}\nSELECT YOUR GUI-DEFAULT THEME\n(1)LIGHT\n(2)DARK\n(3)HIGH-CONTRAST\n\n"
 		read -p"$GREEN[#MR.HOLMES#]$WHITE-->" Language
 	done
-	if [ $Theme == 1 ];
+	if [ "$Theme" == 1 ];
 		then
 		echo '{
     "Color":{
@@ -87,7 +87,7 @@ function Preference {
     }
 }'>GUI/Theme/Mode.json
    	mode="LIGHT"
-	elif [ $Theme == 2 ];
+	elif [ "$Theme" == 2 ];
 	then
 		echo '{
     "Color":{
@@ -95,7 +95,7 @@ function Preference {
     }
 }'>GUI/Theme/Mode.json
 	mode="DARK"
-	elif [ $Theme == 3 ];
+	elif [ "$Theme" == 3 ];
 	then
 		echo '{
     "Color":{
@@ -127,7 +127,7 @@ function Mail_Options {
         printf "${BLUE}\n[?]${WHITE}WOULD YOU LIKE TO ENABLE EMAIL-OPTION(1)YES(2)NO\n\n"
 		read -p"$GREEN[#MR.HOLMES#]$WHITE-->" Opt
 	done
-	if [ $Opt == 1 ];
+	if [ "$Opt" == 1 ];
 		then
 		status="Enabled"
 		printf "${WHITE}\n\nINSERT YOUR RECIPIENT EMAIL\n\n"
@@ -165,7 +165,7 @@ function Mail_Options {
 			printf "${WHITE}\nINSERT YOUR SMTP SERVER PORT \n\n"
 			read -p"$GREEN[#MR.HOLMES#]$WHITE-->" port
 		done
-	elif [ $Opt == 2 ];
+	elif [ "$Opt" == 2 ];
 		then
 		printf "${GREEN}\n[+]${WHITE}SKIPPING...\n"
 		status="Disabled"
@@ -213,10 +213,10 @@ function Options {
 		printf "${WHITE}\n\nWOULD YOU LIKE TO SAVE YOUR LOG SESSIONS(1)YES(2)NO\n\n"
 		read -p"$GREEN[#MR.HOLMES#]$WHITE-->" Logs
 	done
-	if [ $Logs == 2 ];
+	if [ "$Logs" == 2 ];
 		then
 		Logs="False"
-	else [ $Logs == 1 ]
+	else [ "$Logs" == 1 ]
 		Logs="True"
 	fi
 	printf "${WHITE}\n\nWOULD YOU LIKE TO ACCESS YOUR DATABASE ON OTHER DEVICES(ON THE SAME NETWORK)?(1)YES(2)NO\n\n"
@@ -226,10 +226,10 @@ function Options {
 		printf "${WHITE}\n\nWOULD YOU LIKE TO ACCESS YOUR DATABASE ON OTHER DEVICES(ON THE SAME NETWORK)?(1)YES(2)NO\n\n"
 		read -p"$GREEN[#MR.HOLMES#]$WHITE-->" Token
 	done
-	if [ $Token == 2 ];
+	if [ "$Token" == 2 ];
 		then
 		Token="False"
-	else [ $Token == 1 ]
+	else [ "$Token" == 1 ]
 		Token="True"
 	fi
 	printf "${WHITE}\n\nWOULD YOU LIKE TO ADD SOME CREDENTIALS FOR ACCESS THE DATABASE?(1)YES(2)NO\n\n"
@@ -239,7 +239,7 @@ function Options {
 		printf "${WHITE}\n\nWOULD YOU LIKE TO ADD SOME CREDENTIALS FOR ACCESS THE DATABASE?(1)YES(2)NO\n\n"
 		read -p"$GREEN[#MR.HOLMES#]$WHITE-->" Access
 	done
-	if [ $Access == 2 ];
+	if [ "$Access" == 2 ];
 		then
 		Access="False"
 	else [ $Token == 1 ]
@@ -283,17 +283,17 @@ function Options {
 		printf "${WHITE}\nSELECT YOUR CLI-DEFAULT LANGUAGE\n(1)ENGLISH\n(2)ITALIANO\n(3)FRANÇAIS\n\n"
 		read -p"$GREEN[#MR.HOLMES#]$WHITE-->" Language
 	done
-	if [ $Language == 1 ];
+	if [ "$Language" == 1 ];
 		then
 		Lang="english"
 		mode="ENGLISH"
 
-	elif [ $Language == 2 ];
+	elif [ "$Language" == 2 ];
 		then
 		Lang="italian"
 		mode="ITALIANO"
 
-	elif [ $Language == 3 ];
+	elif [ "$Language" == 3 ];
 		then
 		Lang="french"
 		mode="FRANÇAIS"
@@ -306,17 +306,17 @@ function Options {
 		printf "${WHITE}\nSELECT YOUR DATE-FORMAT\n(1)EUROPE(DD/MM/YYYY)\n(2)AMERICA'USA'(MM/DD/YYYY)\n(3)ASIA(YYYY/MM/DD)\n\n"
 		read -p"$GREEN[#MR.HOLMES#]$WHITE-->" DateFormat
 	done
-	if [ $DateFormat == 1 ];
+	if [ "$DateFormat" == 1 ];
 		then
 		Date="eu"
 		mode="EUROPE(EU)"
 
-	elif [ $DateFormat == 2 ];
+	elif [ "$DateFormat" == 2 ];
 		then
 		Date="us"
 		mode="AMERICA(US)"
 
-	elif [ $DateFormat == 3 ];
+	elif [ "$DateFormat" == 3 ];
 		then
 		Date="as"
 		mode="ASIA(AS)"
@@ -324,7 +324,7 @@ function Options {
 	printf "\n${WHITE}DATE-FORMAT:${GREEN}$mode\n"
 	Preference
 	printf "${BLUE}\nCREATING CONFIGURATION FILE"
-	cd Configuration
+	cd Configuration || exit
 	echo ";THIS FILE HAS BEEN GENERATE BY MR.HOLMES INSTALLER">Configuration.ini
 	echo ";CHANGE THESE VALUE IF YOU WANT TO UPDATE YOUR SETTINGS FROM HERE">>Configuration.ini
 	echo ";BUT DO NOT CHANGE THE PARAMETERS NAME">>Configuration.ini
@@ -340,8 +340,8 @@ function Options {
 	echo "[Settings]">>Configuration.ini
 	echo "password = $up_pass">>Configuration.ini
 	echo "api_key = $key">>Configuration.ini
-	echo "proxy_list" = $proxies>>Configuration.ini
-	echo "useragent_list" = $useragent>>Configuration.ini
+	echo "proxy_list" = "$proxies">>Configuration.ini
+	echo "useragent_list" = "$useragent">>Configuration.ini
 	echo "show_logs = $Logs">>Configuration.ini
 	echo "database"= "$Token">>Configuration.ini
 	echo "language"= "$Lang">>Configuration.ini
@@ -424,7 +424,7 @@ function installer {
 		printf "${BLUE}\n\nWELCOME TO THE INSTALLATION MANAGER WOULD YOU LIKE TO BEGIN(1)YES(2)NO\n\n"
 		read -p "$GREEN[#MR.HOLMES#]$WHITE-->" confvar
 	done
-	if [ $confvar == 1 ];
+	if [ "$confvar" == 1 ];
 		then
 		printf "${BLUE}\nWOULD YOU LIKE TO SET(1)MANUAL-INSTALLATION(2)AUTO-INSTALLATION\n\n"
 		read -p "$GREEN[#MR.HOLMES#]$WHITE-->" selected
@@ -433,29 +433,29 @@ function installer {
 			printf "${BLUE}\n\nWOULD YOU LIKE TO SET(1)MANUAL-INSTALLATION(2)AUTO-INSTALLATION\n\n"
 			read -p "$GREEN[#MR.HOLMES#]$WHITE-->" selected
 		done
-		if [ $selected == 1 ];
+		if [ "$selected" == 1 ];
 			then
 			Packet_Installer
 			Mail_Options
 			Options
 			cd ../
 
-		elif [ $selected == 2 ];
+		elif [ "$selected" == 2 ];
 			then
 		    AutoInstaller
 		fi
-		cd Core
+		cd Core || exit
 		printf "${WHITE}\n\nGIVING PERMISSION TO LUNCH FOR CORE FILES"
 		sudo chmod +x update.sh
 		cd ../
-		cd Launchers
+		cd Launchers || exit
 		sudo chmod +x Launcher.sh
 		cd ../
   		cd ../
-		echo "path = `pwd`">>$Fold/Configuration/Configuration.ini
+		echo "path = $(pwd)">>"$Fold"/Configuration/Configuration.ini
 		sleep 2
 		printf "\n\nSETTING CLI INTERFACE..."
-		echo "Desktop">$Fold/Display/Display.txt
+		echo "Desktop">"$Fold"/Display/Display.txt
 		sleep 2
 		printf "${GREEN}\n\n[+]${WHITE}PROGRAM INSTALLED CORRECTLY${GREEN}[+]"
 		printf "${LIGHTGREEN}\n\nTHANK YOU FOR HAVE INSTALLED Mr.Holmes\n\n"
